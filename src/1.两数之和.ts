@@ -6,18 +6,18 @@
 
 // @lc code=start
 function twoSum(nums: number[], target: number): number[] {
-  if (nums.length <= 2) {
-    return [0, 1];
-  }
+  const map: { [key: string]: number } = {}
 
   for (let i = 0; i < nums.length; i++) {
-    for (let j = i + 1; j < nums.length; j++) {
-      if (nums[i] + nums[j] === target) {
-        return [i, j];
-      }
+    const m = target - nums[i]
+
+    if (map[m] !== undefined) {
+      return [map[m], i]
+    } else {
+      map[nums[i]] = i
     }
   }
 
-  return [];
+  return []
 }
 // @lc code=end
