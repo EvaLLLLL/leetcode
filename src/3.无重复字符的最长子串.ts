@@ -8,23 +8,26 @@
 function lengthOfLongestSubstring(s: string): number {
   if (s.length <= 1) return s.length
 
-  let max = 0
-  let p1 = 0
-  let p2 = 1
+  let max = 0,
+    p1 = 0,
+    p2 = 1
 
-  while (p2 < s.length) {
-    let map: { [key: string]: number } = {}
-    for (let i = p1; i <= p2; i++) {
-      const currentStr = s[i]
-      if (map[currentStr] !== undefined) {
-        p1++
-        map = {}
-        break
-      } else {
-        map[currentStr] = 1
-        max = p2 - p1 + 1 > max ? p2 - p1 + 1 : max
-        p2++
+  const hasEqual = (idx1: number, idx2: number) => {
+    for (let i = idx1; i < idx2; i++) {
+      if (s[i] === s[idx2]) {
+        return true
       }
+    }
+
+    return false
+  }
+
+  while (p2 < s.length && p1 < s.length) {
+    if (!hasEqual(p1, p2)) {
+      max = p2 - p1 + 1 > max ? p2 - p1 + 1 : max
+      p2++
+    } else {
+      p1++
     }
   }
 
