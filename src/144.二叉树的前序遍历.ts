@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode.cn id=94 lang=typescript
+ * @lc app=leetcode.cn id=144 lang=typescript
  *
- * [94] 二叉树的中序遍历
+ * [144] 二叉树的前序遍历
  */
 
 // @lc code=start
@@ -19,26 +19,26 @@
  * }
  */
 
-function inorderTraversal(root: TreeNode | null): number[] {
+function preorderTraversal(root: TreeNode | null): number[] {
   let result: number[] = []
 
   if (!root) return result
 
   const stack: TreeNode[] = []
 
-  let curr = root
+  stack.push(root)
 
-  while (curr || stack.length) {
-    // 找到最左边的叶子节点
-    while (curr) {
-      stack.push(curr)
-      curr = curr.left
-    }
-
-    curr = stack.pop()
+  while (stack.length) {
+    const curr = stack.pop()
     result.push(curr.val)
 
-    curr = curr.right
+    if (curr.right) {
+      stack.push(curr.right)
+    }
+
+    if (curr.left) {
+      stack.push(curr.left)
+    }
   }
 
   return result
