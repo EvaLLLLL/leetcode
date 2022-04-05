@@ -41,5 +41,7 @@ function postorderTraversal(root: TreeNode | null): number[] {
       stack.push(curr.right)
     }
   }
+
+  return result
 }
 // @lc code=end
