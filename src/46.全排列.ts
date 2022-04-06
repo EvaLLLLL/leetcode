@@ -16,7 +16,7 @@ function permute(nums: number[]): number[][] {
       return
     }
 
-    for (const num of nums) {
+    for (let num of nums) {
       if (!visited[num]) {
         visited[num] = 1
         path.push(num)
