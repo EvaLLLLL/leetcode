@@ -20,11 +20,33 @@ function addTwoNumbers(
   l1: ListNode | null,
   l2: ListNode | null,
 ): ListNode | null {
-  return null
+  let head = new ListNode(0)
+  let curr = head,
+    p1 = l1,
+    p2 = l2,
+    carry = 0
+
+  while (p1 || p2) {
+    let sum = (p1?.val || 0) + (p2?.val || 0) + carry
+    carry = sum >= 10 ? 1 : 0
+    sum = sum - 10 * carry
+
+    curr.next = new ListNode(sum)
+    curr = curr.next
+
+    if (p1) {
+      p1 = p1.next
+    }
+
+    if (p2) {
+      p2 = p2.next
+    }
+  }
+
+  if (carry) {
+    curr.next = new ListNode(carry)
+  }
+
+  return head.next
 }
 // @lc code=end
-
-const l1 = new ListNode(null)
-const l2 = new ListNode(1, l1)
-const l3 = new ListNode(2, l2)
-addTwoNumbers(l1, l2)
